@@ -1,0 +1,1 @@
+export  const loginAC = () => ({type: 'IS_LOGIN'})

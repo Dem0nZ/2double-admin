@@ -1,0 +1,1 @@
+export  const loginTK = () => ({type: 'IS_LOGIN'})
