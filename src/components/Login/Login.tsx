@@ -4,6 +4,7 @@ import {Form} from "react-final-form";
 import {TextField} from "mui-rff";
 import {Button, Container} from "@material-ui/core";
 import {useSelector} from "react-redux";
+import {authAPI} from "../../api/api";
 
 interface FormData {
     login: string;
@@ -17,7 +18,7 @@ interface RootState {
 }
 
 const onSubmit = (values: FormData) => {
-    console.log(values);
+    authAPI.login(values.login, values.password)
 }
 
 const Login = () => {
