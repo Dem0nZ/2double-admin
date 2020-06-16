@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
         <Route path={'/login'}
-        render={ () => <Login/> }/>
+        render={ () => <Login /> }/>
         <Route path={'/admin'}
                render={ () => <Admin/> }/>
     </div>

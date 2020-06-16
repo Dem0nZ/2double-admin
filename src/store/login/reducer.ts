@@ -1,6 +1,6 @@
 
 let initialState = {
-    isLogin: false
+    isAuth: false
 }
 const loginReducer = (state = initialState) => {
     return state;

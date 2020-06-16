@@ -1,11 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import {Form} from "react-final-form";
 import {TextField} from "mui-rff";
-import {Button} from "@material-ui/core";
+import {Button, Container} from "@material-ui/core";
+import {useSelector} from "react-redux";
 
 interface FormData {
     login: string;
+    password: string
+}
+interface RootState {
+    login: {
+        isAuth: boolean
+    }
+
 }
 
 const onSubmit = (values: FormData) => {
@@ -13,21 +21,23 @@ const onSubmit = (values: FormData) => {
 }
 
 const Login = () => {
+    const isAuth: boolean = useSelector((state: RootState) => state.login.isAuth)
 
-    return ( <div>
-            <div>
-                <NavLink to={'/admin'}>admin</NavLink>
-            </div>
+    if (isAuth) {
+        return <Redirect to={'/admin'} />
+    }
+
+    return ( <Container maxWidth="sm">
                 <Form onSubmit={onSubmit}>
                     {props => (
                         <form onSubmit={props.handleSubmit}>
-                            <TextField label={'login'} name={'login'}/>
-                            <TextField label={'password'} name={'password'}/>
+                            <TextField color="secondary" label={'login'} name={'login'} required={true}/>
+                            <TextField  color="secondary" type={"password"} label={'password'} name={'password'} required={true}/>
                             <Button variant="contained" color="secondary" type="submit">Submit</Button>
                         </form>
                     )}
                 </Form>
-            </div>
+        </Container>
         )
 };
 

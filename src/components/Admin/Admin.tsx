@@ -1,11 +1,9 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {Container} from "@material-ui/core";
 const Admin = () => {
-    return ( <div>
-            <div>
-                <NavLink to={'/login'}>login</NavLink>
-            </div>
-        </div>
+    return ( <Container maxWidth="sm">
+            <h1>Here is admin panel!</h1>
+        </Container>
     )
 };
 
