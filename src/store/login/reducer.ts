@@ -3,9 +3,10 @@ import { Action } from 'redux';
 export const LOGIN = 'LOGIN';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
-
 interface LoginState {
     isAuth: boolean
+    message?: string
+    token?: string
 }
 
 interface IsLoggedInAction extends Action {
@@ -20,14 +21,20 @@ interface LoginErrorAction extends Action {
         message: string
     }
 }
-type LoginAction = IsLoggedInAction | LoginErrorAction
-
+export type LoginAction = IsLoggedInAction | LoginErrorAction
 
 let initialState: LoginState = {
     isAuth: false
 }
 const loginReducer = (state = initialState, action: LoginAction): LoginState => {
-    return state;
+    switch (action.type) {
+        case LOGIN:
+            return {...state, isAuth: true, token: action.payload.token}
+        case LOGIN_ERROR:
+            return {...state, isAuth:false, message: action.payload.message}
+        default:
+            return state
+    }
 };
 
 export default loginReducer;

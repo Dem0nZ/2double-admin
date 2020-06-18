@@ -1,12 +1,11 @@
-import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
-
-
+import axios from 'axios';
+import {LoginResponse} from "../models";
 
 export const authAPI = {
     login(login: string, password: string) {
-        axios.post('https://c5e0f238-2039-4dda-b43d-8f213414bc2e.mock.pstmn.io/auth', {
-            login: 'admin',
-            password: 'azaza'
-        })
-    },
-}
+        return axios.post<LoginResponse>('https://c5e0f238-2039-4dda-b43d-8f213414bc2e.mock.pstmn.io/auth', {
+            login,
+            password
+        });
+    }
+};
