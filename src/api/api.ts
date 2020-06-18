@@ -7,7 +7,7 @@ const instance = axios.create({
 });
 
 // Add a request interceptor
-axios.interceptors.request.use( (config) => {
+instance.interceptors.request.use( (config) => {
     const token = store.getState().login.token;
     if (token != undefined) {
         config.headers['Authorization'] = `Bearer ${token}`;
@@ -21,5 +21,11 @@ export const authAPI = {
             login,
             password
         });
+    }
+};
+
+export const adminAPI = {
+    pron() {
+        return instance.get('/index',);
     }
 };
