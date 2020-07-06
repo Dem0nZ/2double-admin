@@ -9,15 +9,15 @@ const instance = axios.create({
 // Add a request interceptor
 instance.interceptors.request.use( (config) => {
     const token = store.getState().login.token;
-    if (token != undefined) {
+    if (token !== undefined) {
         config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
 });
 
 export const authAPI = {
-    login(login: string, password: string) {
-        return instance.post<LoginResponse>('/auth', {
+    async login(login: string, password: string) {
+        return await instance.post<LoginResponse>('/auth', {
             login,
             password
         });

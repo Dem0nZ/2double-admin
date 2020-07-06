@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/login/thunks';
 
 interface FormData {
-    login: string;
+    login: string
     password: string
 }
 interface RootState {
@@ -17,7 +17,7 @@ interface RootState {
 }
 
 const Login = () => {
-    const isAuth: boolean = useSelector((state: RootState) => state.login.isAuth)
+    const isAuth = useSelector((state: RootState) => state.login.isAuth);
     const dispatch = useDispatch();
 
     const onSubmit = (values: FormData) => {
@@ -30,7 +30,18 @@ const Login = () => {
 // TODO: focus on textfield, error handler
     return (
         <Container maxWidth="sm">
-            <Form onSubmit={ onSubmit }>
+            <Form onSubmit={ onSubmit }
+                  validate={values => {
+                      const errors: Partial<FormData> = {};
+                      if (!values.login) {
+                          errors.login = 'Required';
+                      }
+                      if (!values.password) {
+                          errors.password = 'Required';
+                      }
+                      return errors;
+                  }}
+            >
                 {props => (
                     <form onSubmit={ props.handleSubmit }>
                         <TextField autoFocus={ true } color='secondary' label='login' name='login' required/>

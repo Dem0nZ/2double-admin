@@ -10,28 +10,31 @@ interface LoginState {
 }
 
 interface IsLoggedInAction extends Action {
-    type: typeof LOGIN;
+    type: typeof LOGIN
     payload: {
         token: string
     }
 }
+
 interface LoginErrorAction extends Action {
-    type: typeof LOGIN_ERROR;
+    type: typeof LOGIN_ERROR
     payload: {
         message: string
     }
 }
+
 export type LoginAction = IsLoggedInAction | LoginErrorAction
 
 let initialState: LoginState = {
     isAuth: false
-}
+};
+
 const loginReducer = (state = initialState, action: LoginAction): LoginState => {
     switch (action.type) {
         case LOGIN:
-            return { ...state, isAuth: true, token: action.payload.token }
+            return { ...state, isAuth: true, token: action.payload.token };
         case LOGIN_ERROR:
-            return { ...state, isAuth:false, message: action.payload.message }
+            return { ...state, isAuth: false, message: action.payload.message };
         default:
             return state
     }
