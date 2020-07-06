@@ -1,10 +1,10 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
-import {Form} from "react-final-form";
-import {TextField} from "mui-rff";
-import {Button, Container} from "@material-ui/core";
-import {useDispatch, useSelector} from "react-redux";
-import {login} from "../../store/login/thunks";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { Form } from 'react-final-form';
+import { TextField } from 'mui-rff';
+import { Button, Container } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../store/login/thunks';
 
 interface FormData {
     login: string;
@@ -25,17 +25,17 @@ const Login = () => {
     };
 
     if (isAuth) {
-        return (<Redirect to={'/admin'} />);
+        return (<Redirect to='/admin'/>);
     }
-
+// TODO: focus on textfield, error handler
     return (
         <Container maxWidth="sm">
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={ onSubmit }>
                 {props => (
-                    <form onSubmit={props.handleSubmit}>
-                        <TextField color="secondary" label={'login'} name={'login'} required/>
-                        <TextField  color="secondary" type={"password"} label={'password'} name={'password'} required/>
-                        <Button variant="contained" color="secondary" type="submit">Submit</Button>
+                    <form onSubmit={ props.handleSubmit }>
+                        <TextField autoFocus={ true } color='secondary' label='login' name='login' required/>
+                        <TextField  color='secondary' type='password' label='password' name='password' required/>
+                        <Button variant='contained' color='secondary' type='submit'>Submit</Button>
                     </form>
                 )}
             </Form>

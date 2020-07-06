@@ -6,10 +6,13 @@ import Admin from './components/Admin/Admin';
 function App() {
   return (
     <div>
-        <Route path={'/login'}
-        render={ () => <Login /> }/>
-        <Route path={'/admin'}
-               render={ () => <Admin/> }/>
+        <Route path='/login'>
+            <Login/>
+        </Route>
+        <Route path='/admin'>
+            <Admin/>
+        </Route>
+
     </div>
   );
 }

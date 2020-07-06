@@ -1,7 +1,7 @@
-import {authAPI} from "../../api/api";
-import {loginError, loginSuccess} from "./actions";
-import {LoginAction} from "./reducer";
-import {Dispatch} from "react";
+import { authAPI } from '../../api/api';
+import { loginError, loginSuccess } from './actions';
+import { LoginAction } from './reducer';
+import { Dispatch } from 'react';
 
 export  const login = (login: string, password: string) => {
     return async (dispatch: Dispatch<LoginAction>) => {

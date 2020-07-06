@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {LoginResponse} from "../models";
-import store from "../store";
+import { LoginResponse } from '../models';
+import store from '../store';
 
 const instance = axios.create({
     baseURL: 'https://c5e0f238-2039-4dda-b43d-8f213414bc2e.mock.pstmn.io'
@@ -21,11 +21,5 @@ export const authAPI = {
             login,
             password
         });
-    }
-};
-
-export const adminAPI = {
-    pron() {
-        return instance.get('/index',);
     }
 };
