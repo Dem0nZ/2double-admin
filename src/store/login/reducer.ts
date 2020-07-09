@@ -3,7 +3,7 @@ import { Action } from 'redux';
 export const LOGIN = 'LOGIN';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
-interface LoginState {
+export interface LoginState {
     isAuth: boolean
     message?: string
     token?: string
