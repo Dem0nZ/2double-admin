@@ -32,9 +32,9 @@ let initialState: LoginState = {
 const loginReducer = (state = initialState, action: LoginAction): LoginState => {
     switch (action.type) {
         case LOGIN:
-            return { ...state, isAuth: true, token: action.payload.token };
+            return { isAuth: true, token: action.payload.token, message:undefined };
         case LOGIN_ERROR:
-            return { ...state, isAuth: false, message: action.payload.message };
+            return { isAuth: false, token: undefined, message: action.payload.message };
         default:
             return state
     }

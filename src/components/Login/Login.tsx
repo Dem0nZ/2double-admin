@@ -27,17 +27,16 @@ const Login = () => {
     if (isAuth) {
         return (<Redirect to='/admin'/>);
     }
-// TODO: focus on textfield, error handler
     return (
         <Container maxWidth="sm">
             <Form onSubmit={ onSubmit }
                   validate={values => {
                       const errors: Partial<FormData> = {};
                       if (!values.login) {
-                          errors.login = 'Required';
+                          errors.login = 'Заполните поле';
                       }
                       if (!values.password) {
-                          errors.password = 'Required';
+                          errors.password = 'Заполните поле';
                       }
                       return errors;
                   }}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-import {withAuthRedirect} from "../../containers/adminRoute";
+import { withAuthRedirect } from '../../containers/adminRoute';
 
 const Admin = () => {
     return (
@@ -10,6 +10,6 @@ const Admin = () => {
     );
 };
 
-let AdminWithRedirect = withAuthRedirect({ component: Admin });
+const AdminWithRedirect = withAuthRedirect({ component: Admin });
 
 export default AdminWithRedirect;
