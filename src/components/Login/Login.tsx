@@ -1,15 +1,16 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { Form } from 'react-final-form';
-import { TextField } from 'mui-rff';
-import { Button, Container } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/login/thunks';
+import {Redirect} from 'react-router-dom';
+import {Form} from 'react-final-form';
+import {TextField} from 'mui-rff';
+import {Button, Container} from '@material-ui/core';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../../store/login/thunks';
 
 interface FormData {
     login: string
     password: string
 }
+
 interface RootState {
     login: {
         isAuth: boolean
@@ -25,11 +26,11 @@ const Login = () => {
     };
 
     if (isAuth) {
-        return (<Redirect to='/admin'/>);
+        return (<Redirect to='/admin/menu'/>);
     }
     return (
-        <Container maxWidth="sm">
-            <Form onSubmit={ onSubmit }
+        <Container maxWidth='sm'>
+            <Form onSubmit={onSubmit}
                   validate={values => {
                       const errors: Partial<FormData> = {};
                       if (!values.login) {
@@ -42,9 +43,9 @@ const Login = () => {
                   }}
             >
                 {props => (
-                    <form onSubmit={ props.handleSubmit }>
-                        <TextField autoFocus={ true } color='secondary' label='login' name='login' required/>
-                        <TextField  color='secondary' type='password' label='password' name='password' required/>
+                    <form onSubmit={props.handleSubmit} noValidate>
+                        <TextField autoFocus={true} color='secondary' label='login' name='login' required/>
+                        <TextField color='secondary' type='password' label='password' name='password' required/>
                         <Button variant='contained' color='secondary' type='submit'>Submit</Button>
                     </form>
                 )}
