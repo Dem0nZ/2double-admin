@@ -1,9 +1,9 @@
-import React, {ComponentType} from 'react';
-import {Container} from '@material-ui/core';
+import React, { ComponentType } from 'react';
+import { Container } from '@material-ui/core';
 import Navigation from '../components/Admin/Navigation';
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import {useSelector} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,12 +36,11 @@ const Admin = ({component: Component, ...props}: RedirectArgs) => {
     const classes = useStyles();
     if (!isAuth) return <Redirect to='/login'/>
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth='sm'>
             <Navigation/>
-            <main className={classes.content}>
-                <div className={classes.toolbar}/>
-                <h4>Тут контент</h4>
-                <Component {...props}/>
+            <main className={ classes.content }>
+                <div className={ classes.toolbar }/>
+                <Component { ...props }/>
             </main>
         </Container>
     );
