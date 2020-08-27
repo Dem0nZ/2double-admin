@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { LoginResponse } from '../models';
+import applyCaseMiddleware from 'axios-case-converter';
+import {LoginResponse, Restaurant} from '../models';
 import store from '../store';
 
-const instance = axios.create({
-    baseURL: 'https://c5e0f238-2039-4dda-b43d-8f213414bc2e.mock.pstmn.io'
-});
+const instance = applyCaseMiddleware(axios.create(({
+    baseURL: 'http://127.0.0.1:8000/api'
+})));
 
-// Add a request interceptor
 instance.interceptors.request.use( (config) => {
     const token = store.getState().login.token;
     if (token !== undefined) {
@@ -16,10 +16,16 @@ instance.interceptors.request.use( (config) => {
 });
 
 export const authAPI = {
-    async login(login: string, password: string) {
-        return await instance.post<LoginResponse>('/auth', {
-            login,
+    async login(name: string, password: string) {
+        return await instance.post<LoginResponse>('/auth/login', {
+            name,
             password
         });
     }
 };
+
+export const contactsAPI = {
+    async getCafeList() {
+        return await instance.get<Restaurant[]>('/restaurants')
+    }
+}
