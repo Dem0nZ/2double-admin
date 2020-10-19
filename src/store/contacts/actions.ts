@@ -8,13 +8,13 @@ export const getCafeListSuccess = (list: Restaurant[]): ContactsAction => ({
     }
 });
 
-export const getCafeListError = (message: string):ContactsAction => ({
+export const getCafeListError = (message: string): ContactsAction => ({
     type: GET_CAFE_LIST_ERROR,
     payload: {
         message
     }
 });
 
-export const  startFetching = () => ({
+export const  startFetching = (): ContactsAction => ({
     type: START_FETCHING
 });

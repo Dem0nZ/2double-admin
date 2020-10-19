@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
             ...theme.mixins.toolbar,
         },
         content: {
-            flexGrow: 1,
+            flex: 1,
             padding: theme.spacing(3),
         }
     }));
@@ -36,7 +36,7 @@ const Admin = ({component: Component, ...props}: RedirectArgs) => {
     const classes = useStyles();
     if (!isAuth) return <Redirect to='/login'/>
     return (
-        <Container maxWidth='sm'>
+        <Container maxWidth='lg'>
             <Navigation/>
             <main className={ classes.content }>
                 <div className={ classes.toolbar }/>

@@ -6,11 +6,11 @@ import contactsReducer from "./contacts/reducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
-    contactsReducer
+    contacts: contactsReducer
 });
 
-type RootReducerType = typeof rootReducer
-export type AppStateType = ReturnType<RootReducerType>;
+type RootReducer = typeof rootReducer
+export type AppState = ReturnType<RootReducer>;
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 export default store;

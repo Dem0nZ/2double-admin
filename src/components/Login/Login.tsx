@@ -5,6 +5,7 @@ import { TextField } from 'mui-rff';
 import { Button, Container, CircularProgress, makeStyles } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/login/thunks';
+import {AppState} from "../../store";
 
 
 const useStyles = makeStyles({
@@ -21,14 +22,8 @@ interface FormData {
     password: string
 }
 
-interface RootState {
-    login: {
-        isAuth: boolean
-    }
-}
-
 const Login = () => {
-    const isAuth = useSelector((state: RootState) => state.login.isAuth);
+    const isAuth = useSelector<AppState>((state) => state.login.isAuth);
     const dispatch = useDispatch();
 
     const classes = useStyles();
