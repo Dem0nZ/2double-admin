@@ -9,7 +9,7 @@ export type Restaurant = {
     id: number
     name: string
     address: string
-    schedule: { [ id: string ]: string }
+    schedule: Map<string, string>
     phone: string
     lat: number
     lon: number

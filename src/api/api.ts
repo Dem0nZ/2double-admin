@@ -27,5 +27,11 @@ export const authAPI = {
 export const contactsAPI = {
     async getCafeList() {
         return await instance.get<Restaurant[]>('/restaurants')
+    },
+    async getCafe(id: number) {
+        return await instance.get<Restaurant>(`/restaurants/${id}`)
+    },
+    async deleteCafe(id: number) {
+        return await instance.delete<Restaurant>(`restaurants/${id}`)
     }
 }

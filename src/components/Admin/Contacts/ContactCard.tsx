@@ -1,15 +1,20 @@
-import {Card, CardActionArea, CardContent, CardMedia, Divider, Typography} from "@material-ui/core";
+import {Button, Card, CardActionArea, CardContent, CardMedia, Divider, Typography} from "@material-ui/core";
 import React from "react";
+import DeleteIcon from '@material-ui/icons/Delete';
 import {makeStyles} from "@material-ui/core/styles";
+import ConfirmDialog from "./ConfirmDialog";
 
 const useStyles = makeStyles({
     card: {
         width: 345,
-        height: 275,
+        height: 285,
         margin: 5,
     },
     cardMedia: {
-        height: 155
+        height: 145
+    },
+    button: {
+        margin: "auto"
     }
 })
 
@@ -18,14 +23,23 @@ interface ContactCardProps {
     isOpen?: boolean
     name: string
     address: string
-    editDialog: (id: number | undefined) => void
+    editDialog: (id: number | undefined, address: string | undefined) => void
 }
 
 const ContactCard = ({ id, name, address, editDialog }: ContactCardProps) => {
     const classes = useStyles();
+
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = (value: boolean) => {
+        setOpen(false);
+    };
+
     return (<div>
             <Card key={id} className={classes.card}>
-                <CardActionArea onClick={()=>{ editDialog(id) }}>
+                <CardActionArea onClick={()=>{ editDialog(id, address) }}>
                     <CardMedia
                         className={classes.cardMedia}
                         image="https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=3sVszGantEAe0y_VfKbY0bKRginTKWsi&width=458&height=300"
@@ -40,7 +54,15 @@ const ContactCard = ({ id, name, address, editDialog }: ContactCardProps) => {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
+                <Button
+                    variant='contained'
+                    color='secondary'
+                    className={classes.button}
+                    startIcon={<DeleteIcon />}
+                    onClick={handleClickOpen}
+                >Удалить</Button>
             </Card>
+            <ConfirmDialog open={open} onClose={handleClose} id={id}/>
         </div>
 
         )
