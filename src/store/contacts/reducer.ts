@@ -10,6 +10,7 @@ export const GET_CAFE_ERROR = 'GET_CAFE_ERROR';
 export const START_EDIT_FETCHING = 'START_EDIT_FETCHING';
 export const  DELETE_CAFE = 'DELETE_CAFE';
 export const DELETE_CAFE_ERROR = 'DELETE_CAFE_ERROR';
+export const GET_NEW_CAFE = 'GET_NEW_CAFE';
 
 export interface ContactState {
     restaurants?: Restaurant[]
@@ -43,6 +44,11 @@ interface GetCafeSuccessAction extends Action {
         restaurant: Restaurant
     }
 }
+interface GetNewCafeAction extends Action {
+    type: typeof GET_NEW_CAFE
+    payload: {
+    }
+}
 interface GetCafeErrorAction extends Action  {
     type: typeof GET_CAFE_ERROR
     payload: {
@@ -66,7 +72,7 @@ interface DeleteCafeError extends Action {
 }
 
 export type ContactsAction = GetCafeListSuccessAction | GetCafeListErrorAction | StartFetchingAction |
-    GetCafeSuccessAction | GetCafeErrorAction | StartEditFetchingAction | DeleteCafe | DeleteCafeError
+    GetCafeSuccessAction | GetCafeErrorAction | StartEditFetchingAction | DeleteCafe | DeleteCafeError | GetNewCafeAction
 
 let initialState: ContactState = {
     isFetching: false,
@@ -97,6 +103,13 @@ const contactsReducer = (state = initialState, action: ContactsAction ): Contact
                 edit: {
                     isFetching: false,
                     ...action.payload
+                }
+            };
+        case "GET_NEW_CAFE":
+            return {
+                ...state,
+                edit: {
+                    isFetching: false
                 }
             };
         case "GET_CAFE_ERROR":

@@ -6,7 +6,7 @@ import {
     GET_CAFE_LIST_ERROR,
     START_EDIT_FETCHING,
     START_FETCHING,
-    DELETE_CAFE, DELETE_CAFE_ERROR
+    DELETE_CAFE, DELETE_CAFE_ERROR, GET_NEW_CAFE
 } from "./reducer";
 import {Restaurant} from "../../models";
 
@@ -32,6 +32,13 @@ export const getCafeSuccess = (restaurant: Restaurant): ContactsAction => ({
     type: GET_CAFE,
     payload: {
         restaurant
+    }
+});
+
+export const getNewCafe = (): ContactsAction => ({
+    type: GET_NEW_CAFE,
+    payload: {
+
     }
 });
 

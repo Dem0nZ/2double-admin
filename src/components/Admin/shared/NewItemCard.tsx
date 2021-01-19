@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 })
 
 interface ContactCardProps {
-    id?: number|undefined
+    id?: undefined
     newItemName: string
     editDialog: () => void
 }

@@ -5,6 +5,7 @@ import {TextField} from "mui-rff";
 import useTypedSelector from "../../../hooks/myHooks";
 import {useDispatch} from "react-redux";
 import {getCafe} from "../../../store/contacts/thunks";
+import {getNewCafe} from "../../../store/contacts/actions";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,6 +38,8 @@ const EditDialog = ({id, isOpen, onClose}: DialogProps) => {
     useEffect(() => {
         if (id !== undefined) {
             dispatch(getCafe(id));
+        } else {
+            dispatch(getNewCafe());
         }
     }, [dispatch, id]);
     const restaurant = useTypedSelector(state => state.contacts.edit?.restaurant);

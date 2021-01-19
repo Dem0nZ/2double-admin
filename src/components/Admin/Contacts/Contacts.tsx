@@ -30,6 +30,7 @@ const Contacts = () => {
     }
     const onCloseDialog =() => {
         setOpenDialog(false);
+        setDialogId(undefined);
     }
     const editNewRestaurantDialog = () => {
         setDialogId(undefined);
