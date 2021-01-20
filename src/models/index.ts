@@ -5,14 +5,19 @@ export type LoginResponse = {
 };
 
 //Contacts models
-export type Restaurant = {
-    id: number
+export type RestaurantData = {
     name: string
     address: string
-    schedule: Map<string, string>
+    schedule: string
     phone: string
     lat: number
     lon: number
+}
+
+export type Restaurant = RestaurantData & {
+    id: number
     createdAt: string
     updateAt: string
 }
+
+

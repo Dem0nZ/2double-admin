@@ -2,7 +2,7 @@ import React from 'react';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import {Button, DialogActions} from "@material-ui/core";
-import {deleteCafe} from "../../../store/contacts/thunks";
+import {deleteCafe, getCafeList} from "../../../store/contacts/thunks";
 import {useDispatch} from "react-redux";
 
 export interface ConfirmDialogProps {
@@ -27,6 +27,7 @@ function ConfirmDialog(props: ConfirmDialogProps) {
                     color='primary'
                     onClick={() => {
                         dispatch(deleteCafe(id));
+                        dispatch(getCafeList());
                         handleClose();
                     }}
                 >Удалить</Button>

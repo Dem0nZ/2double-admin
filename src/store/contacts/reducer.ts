@@ -1,16 +1,25 @@
-import { Restaurant } from '../../models';
-import { Action } from 'redux';
+import {Restaurant} from '../../models';
+import {Action} from 'redux';
 
 
 export const GET_CAFE_LIST = 'GET_CAFE_LIST';
 export const GET_CAFE_LIST_ERROR = 'GET_CAFE_LIST_ERROR';
+
 export const START_FETCHING = 'START_FETCHING';
-export const GET_CAFE = 'GET_CAFE';
-export const GET_CAFE_ERROR = 'GET_CAFE_ERROR';
 export const START_EDIT_FETCHING = 'START_EDIT_FETCHING';
-export const  DELETE_CAFE = 'DELETE_CAFE';
-export const DELETE_CAFE_ERROR = 'DELETE_CAFE_ERROR';
+
+export const GET_CAFE = 'GET_CAFE';
 export const GET_NEW_CAFE = 'GET_NEW_CAFE';
+export const GET_CAFE_ERROR = 'GET_CAFE_ERROR';
+
+export const DELETE_CAFE = 'DELETE_CAFE';
+export const DELETE_CAFE_ERROR = 'DELETE_CAFE_ERROR';
+
+export const CREATE_NEW_CAFE = 'CREATE_NEW_CAFE';
+
+export const EDIT_CAFE = 'EDIT_CAFE';
+export const EDIT_CAFE_ERROR = 'EDIT_CAFE_ERROR';
+
 
 export interface ContactState {
     restaurants?: Restaurant[]
@@ -28,12 +37,14 @@ interface GetCafeListSuccessAction extends Action {
         list: Restaurant[]
     }
 }
-interface GetCafeListErrorAction extends Action  {
+
+interface GetCafeListErrorAction extends Action {
     type: typeof GET_CAFE_LIST_ERROR
     payload: {
         message: string
     }
 }
+
 interface StartFetchingAction extends Action {
     type: typeof START_FETCHING
 }
@@ -44,17 +55,19 @@ interface GetCafeSuccessAction extends Action {
         restaurant: Restaurant
     }
 }
+
 interface GetNewCafeAction extends Action {
     type: typeof GET_NEW_CAFE
-    payload: {
-    }
+    payload: {}
 }
-interface GetCafeErrorAction extends Action  {
+
+interface GetCafeErrorAction extends Action {
     type: typeof GET_CAFE_ERROR
     payload: {
         message: string
     }
 }
+
 interface StartEditFetchingAction extends Action {
     type: typeof START_EDIT_FETCHING
 }
@@ -71,8 +84,40 @@ interface DeleteCafeError extends Action {
     }
 }
 
-export type ContactsAction = GetCafeListSuccessAction | GetCafeListErrorAction | StartFetchingAction |
-    GetCafeSuccessAction | GetCafeErrorAction | StartEditFetchingAction | DeleteCafe | DeleteCafeError | GetNewCafeAction
+interface CreateCafeSuccessAction extends Action {
+    type: typeof CREATE_NEW_CAFE
+    payload: {
+        newRestaurant : Restaurant
+    }
+}
+
+interface EditCafeSuccessAction extends Action {
+    type: typeof EDIT_CAFE
+    payload: {
+        restaurant : Restaurant
+    }
+}
+
+interface EditCafeErrorAction extends Action {
+    type: typeof EDIT_CAFE_ERROR
+    payload: {
+        message: string
+    }
+}
+
+export type ContactsAction =
+    GetCafeListSuccessAction
+    | GetCafeListErrorAction
+    | StartFetchingAction
+    | GetCafeSuccessAction
+    | GetCafeErrorAction
+    | StartEditFetchingAction
+    | DeleteCafe
+    | DeleteCafeError
+    | GetNewCafeAction
+    | CreateCafeSuccessAction
+| EditCafeSuccessAction
+| EditCafeErrorAction
 
 let initialState: ContactState = {
     isFetching: false,
@@ -81,23 +126,23 @@ let initialState: ContactState = {
     }
 }
 
-const contactsReducer = (state = initialState, action: ContactsAction ): ContactState => {
+const contactsReducer = (state = initialState, action: ContactsAction): ContactState => {
     switch (action.type) {
-        case "GET_CAFE_LIST":
+        case GET_CAFE_LIST:
             return {
                 isFetching: false,
                 restaurants: action.payload.list
             };
-        case "GET_CAFE_LIST_ERROR":
-            return  {
+        case GET_CAFE_LIST_ERROR:
+            return {
                 isFetching: false,
                 error: action.payload.message
             };
-        case "START_FETCHING":
+        case START_FETCHING:
             return {
                 isFetching: true
             };
-        case "GET_CAFE":
+        case GET_CAFE:
             return {
                 ...state,
                 edit: {
@@ -105,34 +150,56 @@ const contactsReducer = (state = initialState, action: ContactsAction ): Contact
                     ...action.payload
                 }
             };
-        case "GET_NEW_CAFE":
+        case GET_NEW_CAFE:
             return {
                 ...state,
                 edit: {
                     isFetching: false
                 }
             };
-        case "GET_CAFE_ERROR":
-            return  {
+        case GET_CAFE_ERROR:
+            return {
                 isFetching: false,
                 error: action.payload.message
             };
-        case "START_EDIT_FETCHING":
+        case START_EDIT_FETCHING:
             return {
                 ...state,
-                edit:{
+                edit: {
                     isFetching: true,
                 }
             };
-        case "DELETE_CAFE":
+        case DELETE_CAFE:
             return {
                 ...state,
-                restaurants: state.restaurants?.filter(res => res.id != action.id)
+                restaurants: state.restaurants?.filter(res => res.id !== action.id)
             }
-        // case "DELETE_CAFE_ERROR":
-        //     return {
-        //     error: action.payload.message
-        //     };
+        case DELETE_CAFE_ERROR:
+            return {
+                isFetching: false,
+                error: action.payload.message
+            };
+        case CREATE_NEW_CAFE:
+            return {
+                ...state,
+                edit: {
+                    isFetching: false,
+                    ...action.payload.newRestaurant
+                }
+            };
+        case EDIT_CAFE:
+            return {
+                ...state,
+                edit: {
+                    isFetching: false,
+                    restaurant: action.payload.restaurant
+                }
+            };
+        case EDIT_CAFE_ERROR:
+            return {
+                isFetching: false,
+                error: action.payload.message
+            };
         default:
             return state;
     }

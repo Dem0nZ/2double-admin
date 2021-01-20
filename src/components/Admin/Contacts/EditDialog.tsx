@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
-import {Button, CircularProgress, Dialog, Grid, makeStyles, createStyles, Theme, Paper} from "@material-ui/core";
-import {Form, Field} from 'react-final-form';
+import {Button, CircularProgress, Dialog, Grid, makeStyles, createStyles, Theme} from "@material-ui/core";
+import {Form} from 'react-final-form';
 import {TextField} from "mui-rff";
 import useTypedSelector from "../../../hooks/myHooks";
 import {useDispatch} from "react-redux";
-import {getCafe} from "../../../store/contacts/thunks";
+import {createCafe, editCafe, getCafe, getCafeList} from "../../../store/contacts/thunks";
 import {getNewCafe} from "../../../store/contacts/actions";
+import {RestaurantData} from "../../../models";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -26,20 +27,40 @@ export interface DialogProps {
     onClose: () => void
 }
 
-const onSubmit = () => {
-
-}
 
 
 const EditDialog = ({id, isOpen, onClose}: DialogProps) => {
 
+
     const isFetching = useTypedSelector(state => state.contacts.edit?.isFetching);
     const dispatch = useDispatch();
+
+    const onSubmit = (values: RestaurantData) => {
+        let rest = {
+            name: values.name,
+            address: values.address,
+            schedule: values.schedule,
+            phone: values.phone,
+            lat: 57.817482,
+            lon: 28.300507,
+        }
+
+        if (id !== undefined) {
+            dispatch(editCafe(id, rest));
+        } else {
+            dispatch(createCafe(rest));
+        }
+
+        dispatch(getCafeList());
+        onClose();
+
+    }
+
     useEffect(() => {
         if (id !== undefined) {
             dispatch(getCafe(id));
         } else {
-            dispatch(getNewCafe());
+            getNewCafe();
         }
     }, [dispatch, id]);
     const restaurant = useTypedSelector(state => state.contacts.edit?.restaurant);
@@ -65,20 +86,12 @@ const EditDialog = ({id, isOpen, onClose}: DialogProps) => {
                                             </Grid>
                                             <Grid container item xs={6}>
                                                 <Grid item xs={12}>
-                                                    <p>Режим работы:</p>
-                                                </Grid>
-
-                                                <Grid item xs={6}>
-                                                    пн-пт
+                                                    <TextField color='secondary' label='Название ресторана'
+                                                               name='name' required/>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    9.00-12.00
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    сб-вс
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    9.00-12.00
+                                                    <TextField autoFocus={true} color='secondary' label='Время работы'
+                                                               name='schedule' required/>
                                                 </Grid>
                                                 <Grid item xs={12}>
                                                     <TextField color='secondary' label='Телефон'

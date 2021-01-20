@@ -1,12 +1,17 @@
 import {
     ContactsAction,
+    CREATE_NEW_CAFE,
+    DELETE_CAFE,
+    DELETE_CAFE_ERROR,
+    EDIT_CAFE,
+    EDIT_CAFE_ERROR,
     GET_CAFE,
     GET_CAFE_ERROR,
     GET_CAFE_LIST,
     GET_CAFE_LIST_ERROR,
+    GET_NEW_CAFE,
     START_EDIT_FETCHING,
-    START_FETCHING,
-    DELETE_CAFE, DELETE_CAFE_ERROR, GET_NEW_CAFE
+    START_FETCHING
 } from "./reducer";
 import {Restaurant} from "../../models";
 
@@ -58,8 +63,29 @@ export const deleteCafeSuccess = (id: number): ContactsAction => ({
     id: id
 })
 
-export const DeleteCafeError = (message: string): ContactsAction => ({
+export const deleteCafeError = (message: string): ContactsAction => ({
     type: DELETE_CAFE_ERROR,
+    payload: {
+        message
+    }
+})
+
+export const createNewCafeSuccess = (newRestaurant: Restaurant): ContactsAction => ({
+    type: CREATE_NEW_CAFE,
+    payload: {
+        newRestaurant
+    }
+})
+
+export const editCafeSuccess = (restaurant: Restaurant): ContactsAction => ({
+    type: EDIT_CAFE,
+    payload: {
+        restaurant
+    }
+})
+
+export const editCafeError = (message: string): ContactsAction => ({
+    type: EDIT_CAFE_ERROR,
     payload: {
         message
     }
