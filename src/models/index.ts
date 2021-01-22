@@ -20,4 +20,12 @@ export type Restaurant = RestaurantData & {
     updateAt: string
 }
 
+//Menu models
+export type Category = {
+    id: number
+    name: string
+    createdAt: string
+    updateAt: string
+}
+
 

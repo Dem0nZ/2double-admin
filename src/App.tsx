@@ -8,10 +8,11 @@ import Contacts from './components/Admin/Contacts/Contacts';
 import News from './components/Admin/News/News';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Dashboard from './components/Admin/Dashboard/Dashboard';
+import {YMaps} from "react-yandex-maps";
 
 function App() {
     return (
-        <div>
+        <YMaps>
             <CssBaseline />
             <Route exact path='/login'>
                 <Login/>
@@ -31,8 +32,7 @@ function App() {
             <Route exact path='/admin/news'>
                 <Admin component={ News }/>
             </Route>
-
-        </div>
+        </YMaps>
     );
 }
 

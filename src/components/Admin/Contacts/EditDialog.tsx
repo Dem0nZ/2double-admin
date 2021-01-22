@@ -27,8 +27,6 @@ export interface DialogProps {
     onClose: () => void
 }
 
-
-
 const EditDialog = ({id, isOpen, onClose}: DialogProps) => {
 
 
@@ -41,8 +39,8 @@ const EditDialog = ({id, isOpen, onClose}: DialogProps) => {
             address: values.address,
             schedule: values.schedule,
             phone: values.phone,
-            lat: 57.817482,
-            lon: 28.300507,
+            lat: values.lat,
+            lon: values.lon,
         }
 
         if (id !== undefined) {
@@ -65,8 +63,11 @@ const EditDialog = ({id, isOpen, onClose}: DialogProps) => {
     }, [dispatch, id]);
     const restaurant = useTypedSelector(state => state.contacts.edit?.restaurant);
 
-
     const classes = useStyles();
+
+
+
+
     return (
         <Dialog open={isOpen} onClose={onClose}>
             {isFetching ? <CircularProgress color='secondary'/> :
@@ -89,8 +90,8 @@ const EditDialog = ({id, isOpen, onClose}: DialogProps) => {
                                                     <TextField color='secondary' label='Название ресторана'
                                                                name='name' required/>
                                                 </Grid>
-                                                <Grid item xs={6}>
-                                                    <TextField autoFocus={true} color='secondary' label='Время работы'
+                                                <Grid item xs={12}>
+                                                    <TextField color='secondary' label='Время работы'
                                                                name='schedule' required/>
                                                 </Grid>
                                                 <Grid item xs={12}>
@@ -98,8 +99,18 @@ const EditDialog = ({id, isOpen, onClose}: DialogProps) => {
                                                                name='phone' required/>
                                                 </Grid>
                                             </Grid>
-                                            <Grid item xs={6}>
-                                                vfvdfv
+                                            <Grid id='map' item xs={6}>
+                                                <Grid item xs={12}>
+                                                   <h2>Координаты ресторана:</h2>
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <TextField color='secondary' label='Широта'
+                                                               name='lat' required/>
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <TextField color='secondary' label='Долгота'
+                                                               name='lon' required/>
+                                                </Grid>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Button variant='contained' color='secondary'

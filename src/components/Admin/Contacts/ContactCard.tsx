@@ -1,8 +1,9 @@
-import {Button, Card, CardActionArea, CardContent, CardMedia, Divider, Typography} from "@material-ui/core";
+import {Button, Card, CardActionArea, CardContent, Divider, Typography} from "@material-ui/core";
 import React from "react";
 import DeleteIcon from '@material-ui/icons/Delete';
 import {makeStyles} from "@material-ui/core/styles";
 import ConfirmDialog from "./ConfirmDialog";
+import {Map, Placemark} from "react-yandex-maps";
 
 const useStyles = makeStyles({
     card: {
@@ -10,7 +11,7 @@ const useStyles = makeStyles({
         height: 285,
         margin: 5,
     },
-    cardMedia: {
+    cardMap: {
         height: 145
     },
     button: {
@@ -23,10 +24,12 @@ interface ContactCardProps {
     isOpen?: boolean
     name: string
     address: string
+    lat: number
+    lon: number
     editDialog: (id: number | undefined, address: string | undefined) => void
 }
 
-const ContactCard = ({ id, name, address, editDialog }: ContactCardProps) => {
+const ContactCard = ({ id, name, address, editDialog, lat, lon }: ContactCardProps) => {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -40,11 +43,11 @@ const ContactCard = ({ id, name, address, editDialog }: ContactCardProps) => {
     return (<div>
             <Card key={id} className={classes.card}>
                 <CardActionArea onClick={()=>{ editDialog(id, address) }}>
-                    <CardMedia
-                        className={classes.cardMedia}
-                        image="https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=3sVszGantEAe0y_VfKbY0bKRginTKWsi&width=458&height=300"
-                    />
                     <CardContent>
+                        <Map className={classes.cardMap}
+                             defaultState={{ center: [lat, lon], zoom: 14 }}>
+                            <Placemark geometry={[lat, lon]} />
+                        </Map>
                         <Typography gutterBottom variant='h5' component='h2'>
                             {name}
                         </Typography>

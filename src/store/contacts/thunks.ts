@@ -12,7 +12,7 @@ import {
     startEditFetching,
     startFetching
 } from "./actions";
-import {RestaurantData, Restaurant} from "../../models";
+import {RestaurantData} from "../../models";
 
 
 export  const getCafeList = () => {

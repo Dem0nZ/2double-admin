@@ -6,7 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles({
     card: {
         width: 345,
-        height: 275,
+        height: 285,
         margin: 5
     },
     cardMedia: {

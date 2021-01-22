@@ -1,6 +1,6 @@
 import axios from 'axios';
 import applyCaseMiddleware from 'axios-case-converter';
-import {LoginResponse, RestaurantData, Restaurant} from '../models';
+import {LoginResponse, RestaurantData, Restaurant, Category} from '../models';
 import store from '../store';
 
 const instance = applyCaseMiddleware(axios.create(({
@@ -26,13 +26,13 @@ export const authAPI = {
 
 export const contactsAPI = {
     async getCafeList() {
-        return await instance.get<Restaurant[]>('/restaurants')
+        return await instance.get<Restaurant[]>('/restaurants');
     },
     async getCafe(id: number) {
-        return await instance.get<Restaurant>(`/restaurants/${id}`)
+        return await instance.get<Restaurant>(`/restaurants/${id}`);
     },
     async deleteCafe(id: number) {
-        return await instance.delete<Restaurant>(`restaurants/${id}`)
+        return await instance.delete<Restaurant>(`restaurants/${id}`);
     },
     async createCafe(newRestaurant: RestaurantData) {
         return await instance.post<Restaurant>(`restaurants`, newRestaurant
@@ -41,5 +41,14 @@ export const contactsAPI = {
     async editCafe(id: number, restaurant: RestaurantData) {
         return await instance.put<Restaurant>(`restaurants/${id}`, restaurant
         );
+    }
+}
+
+export const menuCategoriesAPI = {
+    async getCategories() {
+        return await instance.get<Category[]>('/categories');
+    },
+    async deleteCategory(id: number) {
+        return await instance.delete<Category>(`/categories/${id}`);
     }
 }

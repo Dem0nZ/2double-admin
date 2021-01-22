@@ -1,12 +1,14 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import loginReducer from './login/reducer';
+import contactsReducer from "./contacts/reducer";
+import menuReducer from "./menu/reducer";
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import contactsReducer from "./contacts/reducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
-    contacts: contactsReducer
+    contacts: contactsReducer,
+    menu: menuReducer
 });
 
 type RootReducer = typeof rootReducer

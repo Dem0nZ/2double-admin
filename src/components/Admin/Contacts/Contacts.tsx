@@ -40,7 +40,7 @@ const Contacts = () => {
     return (<div className={classes.container}>
             { isFetching ? <CircularProgress color='secondary'/> : null }
             { restaurants && restaurants.map(restaurant =>
-                <ContactCard id={restaurant.id} name={restaurant.name} address={restaurant.address} editDialog={(id) => editDialog(id)}/>
+                <ContactCard id={restaurant.id} lat={restaurant.lat} lon={restaurant.lon} name={restaurant.name} address={restaurant.address} editDialog={(id) => editDialog(id)}/>
             ) }
             <NewItemCard id={undefined} newItemName={'Добавить новый адресс'} editDialog={() => editNewRestaurantDialog()}/>
             <EditDialog id={dialogId} isOpen={openDialog} onClose={onCloseDialog}/>
